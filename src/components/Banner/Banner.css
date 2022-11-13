@@ -1,0 +1,28 @@
+.banner {
+  width: calc(100% - (40px * 2));
+  background-color: var(--color-grey);
+  border-radius: 10px;
+  margin: 20px auto 0px auto;
+  padding-bottom: 30px;
+}
+
+.banner__title {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  max-width: 730px;
+  letter-spacing: -0.04em;
+  padding-top: 160px;
+  padding-bottom: 150px;
+  margin: 0 auto;
+}
+
+
+@media screen and (max-width: 924px) {
+
+}
+
+@media screen and (max-width: 450px) {
+
+}

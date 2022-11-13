@@ -1,0 +1,26 @@
+.sign {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sign__link {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 3px;
+  padding: 8px 20px;
+  border: none;
+  background: none;
+}
+
+.sign__link_active {
+  background-color: var(--color-green);
+}
+
+@media screen and (max-width: 900px) {
+
+}
+
+@media screen and (max-width: 450px) {
+}

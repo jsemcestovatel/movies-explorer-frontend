@@ -1,0 +1,16 @@
+.header__burger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  box-sizing: border-box;
+  margin: 0;
+  object-fit: contain;
+  background: none;
+  background-image: url(../../images/Burger.svg);
+}
+
+@media screen and (max-width: 768px) {
+  .header__burger {
+    display: block;
+  }
+}

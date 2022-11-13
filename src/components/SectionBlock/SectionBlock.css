@@ -1,0 +1,18 @@
+.section-block_grey {
+  background-color: var(--color-grey);
+}
+
+.section-block {
+  padding: 100px 70px;
+  margin: 0 auto;
+}
+
+.section-block__title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  padding-bottom: 23px;
+  border-bottom: 1px solid var(--color-black);
+  margin: 0;
+}

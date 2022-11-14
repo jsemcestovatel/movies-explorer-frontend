@@ -43,10 +43,55 @@
   padding-right: 20px;
 }
 
-@media screen and (max-width: 1000px) {
-
+@media screen and (max-width: 920px) {
+  .aboutme__description {
+    max-width: 364px;
+  }
+  .aboutme__name {
+    font-size: 40px;
+    line-height: 40px;
+    margin: 0 0 16px 0;
+  }
+  .aboutme__status {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0 0 20px 0;
+  }
+  .aboutme__text {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0 0 87px 0;
+  }
+  .aboutme__image {
+    width: 255px;
+  }
 }
 
-@media screen and (max-width: 650px) {
-
+@media screen and (max-width: 620px) {
+  .aboutme {
+    flex-direction: column-reverse;
+    padding-top: 60px;
+  }
+  .aboutme__description {
+    max-width: none;
+  }
+  .aboutme__name {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 0 0 20px 0;
+  }
+  .aboutme__status {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 0 20px 0;
+  }
+  .aboutme__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0 0 40px 0;
+  }
+  .aboutme__image {
+    width: 100%;
+    padding-bottom: 40px;
+  }
 }

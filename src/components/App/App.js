@@ -99,7 +99,7 @@ function App() {
           <Route>
             <NotFound />
           </Route>
-          
+
         </Switch>
       </div>
     </CurrentUserContext.Provider>

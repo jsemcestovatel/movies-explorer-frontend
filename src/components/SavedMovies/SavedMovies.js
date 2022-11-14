@@ -13,7 +13,7 @@ function SavedMovies({ isLoggedIn }) {
     <>
       <Header isLoggedIn={isLoggedIn} />
       <Search />
-      <section className='saved-movies'>
+      <section className='movies'>
         <MoviesCardList>
           {initialCards.map((item) => (
             <MoviesCard

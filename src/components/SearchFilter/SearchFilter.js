@@ -1,8 +1,8 @@
 import React from 'react';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
-import './Filter.css';
+import './SearchFilter.css';
 
-function Filter() {
+function SearchFilter() {
   const [check, setCheck] = React.useState(true);
 
   return (
@@ -17,4 +17,4 @@ function Filter() {
   );
 }
 
-export default Filter;
+export default SearchFilter;

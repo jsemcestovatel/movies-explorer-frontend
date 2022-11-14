@@ -1,12 +1,7 @@
 import Sign from '../Sign/Sign';
 
 function HeaderNotAuth() {
-  return (
-    <>
-      <>ㅤ</>
-      <Sign />
-    </>
-  );
+  return <Sign />;
 }
 
 export default HeaderNotAuth;

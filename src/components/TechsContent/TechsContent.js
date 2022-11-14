@@ -8,7 +8,7 @@ function TechsContent() {
         На курсе веб-разработки мы освоили технологии, которые применили в
         дипломном проекте.
       </p>
-      <ul className='nav-tab nav-tab_90'>
+      <ul className='nav-tab nav-tab_techs'>
         <li className='nav-tab__item'>HTML</li>
         <li className='nav-tab__item'>CSS</li>
         <li className='nav-tab__item'>JS</li>

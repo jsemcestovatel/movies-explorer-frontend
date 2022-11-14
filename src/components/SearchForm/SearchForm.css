@@ -14,12 +14,10 @@
   border: none;
   border-radius: 8px;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 18px;
-  height: 50px;
+  font-size: 18px;
+  line-height: 20px;
   color: var(--color-black);
-  padding-left: 65px;
-  margin-right: 45px;
+  padding: 25px 25px 25px 65px;
   background: url('../../images/Search.svg') no-repeat left;
   background-size: 22px;
   background-position: 25px;
@@ -38,8 +36,32 @@
   padding-right: 65px;
   border-right-color: var(--color-darkgrey);
   border-right-style: solid;
-  border-right-width: 1px; 
+  border-right-width: 1px;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 920px) {
+  .search__input {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .search__button {
+    padding-right: 55px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .search__form {
+    border-radius: 9px;      
+  }
+
+  .search__input {
+    font-size: 14px;
+    line-height: 20px;
+    background: none;
+    padding-left: 19px;
+  }
+
+  .search__button {
+    border: none;
+  }
 }

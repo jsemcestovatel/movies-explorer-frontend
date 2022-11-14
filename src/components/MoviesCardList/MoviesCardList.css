@@ -9,14 +9,21 @@
   list-style: none;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 1279px) {
   .movies__elements {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .movies__elements {
+    gap: 36px 30px;
   }
 }
 
 @media screen and (max-width: 620px) {
   .movies__elements {
     grid-template-columns: repeat(1, 1fr);
+    gap: 16px;
   }
 }

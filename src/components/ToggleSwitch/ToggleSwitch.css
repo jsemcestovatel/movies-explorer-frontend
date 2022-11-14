@@ -47,3 +47,10 @@
   padding-left: 50px;
   position: absolute;
 }
+
+@media screen and (max-width: 620px) {
+  .toggleswitch__caption {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}

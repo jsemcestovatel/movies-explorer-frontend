@@ -44,11 +44,23 @@
   display: none;
 }
 
+@media screen and (max-width: 920px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .header {
+    padding: 18px 14px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .header {
     grid-template-columns: min-content min-content;
   }
-  
+
   .header__container {
     width: 520px;
     height: 100%;
@@ -57,7 +69,7 @@
     position: fixed;
     box-sizing: border-box;
     top: 0;
-    left: 30%;
+    right: 0;
   }
 
   .header__mobile {
@@ -74,5 +86,4 @@
   .header__desktop {
     display: none;
   }
-    
 }

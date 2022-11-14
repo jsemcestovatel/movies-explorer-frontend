@@ -14,7 +14,16 @@
   grid-area: decoration;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 920px) {
+  .search {
+    padding: 80px 30px 10px 30px;
+  }
+  .decoration {
+    padding-top: 110px;
+  }
+}
+
+@media screen and (max-width: 620px) {
   .search {
     flex-direction: row;
     grid-template-columns: 1fr;
@@ -23,5 +32,8 @@
       'filter'
       'decoration';
     padding: 80px 10px 10px 10px;
+  }
+  .decoration {
+    padding: 0;
   }
 }

@@ -1,5 +1,5 @@
 import SearchForm from '../SearchForm/SearchForm';
-import Filter from '../Filter/Filter';
+import SearchFilter from '../SearchFilter/SearchFilter';
 
 import './Search.css';
 
@@ -7,7 +7,7 @@ function Search() {
   return (
     <section className='search'>
       <SearchForm />
-      <Filter />
+      <SearchFilter />
       <div className='decoration'> </div>
     </section>
   );

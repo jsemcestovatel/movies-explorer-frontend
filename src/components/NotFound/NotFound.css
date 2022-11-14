@@ -29,7 +29,7 @@
   color: var(--color-orange);
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 620px) {
   .page404__title {
     font-size: 80px;
     line-height: 97px;

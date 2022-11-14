@@ -2,7 +2,7 @@
   display: grid;
   flex-direction: row;
   grid-auto-flow: column;
-  grid-auto-columns: 550px;
+  grid-auto-columns: 1fr;
   gap: 40px;
   justify-content: space-between;
   padding-top: 70px;
@@ -49,7 +49,7 @@
 }
 
 .steps__duration {
-  padding: 9px 0 9px 0;
+  padding: 9px 0;
   margin: 0;
   font-weight: 400;
   font-size: 14px;
@@ -69,18 +69,48 @@
   color: var(--color-ground);
 }
 
-@media screen and (max-width: 1279px) {
-
+@media screen and (max-width: 920px) {
+  .project {
+    gap: 30px;
+    padding-top: 70px;
+    padding-bottom: 90px;
+  }
+  .project__column {
+    row-gap: 22px;
+  }
+  .project__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
 }
 
-@media screen and (max-width: 900px) {
-
-}
-
-@media screen and (max-width: 767px) {
-
-}
-
-@media screen and (max-width: 500px) {
-
+@media screen and (max-width: 620px) {
+  .project {
+    grid-auto-flow: row;
+    gap: 58px;
+    padding-top: 60px;
+    padding-bottom: 70px;
+  }
+  .project__column {
+    row-gap: 16px;
+  }
+  .project__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .project__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .steps__name,
+  .steps__duration {
+    font-size: 11px;
+    line-height: 13px;
+  }
+  .steps__duration {
+    padding: 11px 0;
+  }
+  .steps__column {
+    row-gap: 10px;
+  }
 }

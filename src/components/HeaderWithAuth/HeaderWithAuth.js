@@ -18,7 +18,7 @@ function HeaderWithAuth() {
   return (
     <>
       <div className='header__desktop'>
-        <Navigation />
+        <Navigation type='row'/>
         <Account />
       </div>
       <div className={isOpen ? 'header__mobile' : 'header__mobile hidden'}>
@@ -27,7 +27,7 @@ function HeaderWithAuth() {
             className='header__close button link'
             onClick={handleCloseClick}
           ></button>
-          <Navigation />
+          <Navigation type='column'/>
           <Account />
         </div>
       </div>

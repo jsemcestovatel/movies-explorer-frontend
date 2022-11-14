@@ -6,6 +6,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import More from '../More/More';
 import Footer from '../Footer/Footer';
+import Preloader from '../Preloader/Preloader';
 
 import { initialCards } from '../../utils/initialCards';
 
@@ -14,6 +15,7 @@ function Movies({ isLoggedIn }) {
     <>
       <Header isLoggedIn={isLoggedIn} />
       <Search />
+      <Preloader />
       <section className='movies'>
         <MoviesCardList>
           {initialCards.map((item) => (

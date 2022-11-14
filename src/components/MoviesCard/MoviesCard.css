@@ -62,20 +62,6 @@
   color: var(--color-ground);
 }
 
-/* @media screen and (max-width: 970px) {
-}
-
-@media screen and (max-width: 767px) {
-} */
-
-
-@media screen and (max-width: 1279px) {
-  .element__name {
-    /* max-width: max(250px, 100% - 54px); */
-    /* width: 100%; */
-  }
-}
-
 @media screen and (max-width: 767px) {
   .element__name {
     max-width: 210px;

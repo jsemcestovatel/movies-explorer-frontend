@@ -1,7 +1,15 @@
 .navigation {
   display: flex;
   align-items: center;
+}
+
+.navigation_row {
   gap: 16px;
+}
+
+.navigation_column {
+  gap: 28px;
+  flex-direction: column;
 }
 
 .navigation__item {
@@ -10,12 +18,22 @@
   font-weight: 400;
 }
 
+.navigation__item_row:first-child {
+  display: none;
+}
+
 .navigation__item_active {
   font-weight: 500;
 }
 
-@media screen and (min-width: 767px) {
-  .navigation__item_hidden {
-    display: none;
-  }  
+.navigation__item_column {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation__item_active {
+    border-bottom: 2px solid var(--color-black);
+  }
 }

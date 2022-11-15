@@ -1,0 +1,69 @@
+.element {
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+.element__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.element__description {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.element__name {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 280px;
+}
+
+.element__bookmark {
+  min-width: 30px;
+  min-height: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30px 30px;
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+  border: 0;
+}
+
+.element__bookmark_empty {
+  background-image: url('../../images/Bookmark_empty.svg');
+}
+
+.element__bookmark_add {
+  background-image: url('../../images/Bookmark_add.svg');
+}
+
+.element__bookmark_delete {
+  background-image: url('../../images/Bookmark_delete.svg');
+}
+
+.element__duration {
+  margin: 0;
+  padding-top: 9px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: var(--color-ground);
+}
+
+@media screen and (max-width: 767px) {
+  .element__name {
+    max-width: 210px;
+  }
+}

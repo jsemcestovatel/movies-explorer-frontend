@@ -43,10 +43,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  height: 269px;
   z-index: 10;
-  padding: 20px;
+  padding: 70px;
 }
 
 .preloader__container {
@@ -61,7 +60,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: #ff6838;
+  background: var(--color-darkgrey);
   border-radius: 50px;
 }
 
@@ -77,16 +76,24 @@
 }
 
 .preloader__round::after {
-  background: white;
+  background: var(--color-white);
   animation: preloader-inside-white 1s ease-in-out infinite;
 }
 
 .preloader__round::before {
   z-index: 10;
-  background: #ff6838;
+  background: var(--color-orange);
   animation: preloader-inside-red 1s ease-in-out infinite;
 }
 
-.hidden {
-  display: none;
+@media screen and (max-width: 920px) {
+  .preloader {
+    height: 256px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .preloader {
+    height: 234px;
+  }
 }

@@ -2,6 +2,10 @@
   padding: 70px;
 }
 
+.search__error {
+  text-align: center;
+}
+
 @media screen and (max-width: 920px) {
   .movies {
     padding: 70px 30px;

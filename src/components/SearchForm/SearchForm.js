@@ -4,7 +4,6 @@ function SearchForm({ value, onSubmit, onChange }) {
   return (
     <form className='search__form' name='search' onSubmit={onSubmit}>
       <input
-        autoFocus
         className='search__input'
         type='text'
         id='search'

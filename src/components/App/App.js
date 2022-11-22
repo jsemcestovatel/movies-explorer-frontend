@@ -178,6 +178,13 @@ function App() {
       getSavedMovies();
     }
   }, [isLoggedIn]);
+  
+  React.useEffect(()=> {
+    setRequestSearchError({
+      isRequestError: false,
+      messageRequestError: '',
+    });
+  },[location]);
 
   function getAllMovies() {
     moviesApi
@@ -285,10 +292,17 @@ function App() {
         setIsLoading(false);
         return;
       }
-
+      setRequestSearchError({
+        isRequestError: false,
+        messageRequestError: '',
+      });
       setFilteredMovies(filter);
     }
     if (savedMoviesPage) {
+      setRequestSearchError({
+        isRequestError: false,
+        messageRequestError: '',
+      });
       setFilteredSavedMovies(filter);
     }
 

@@ -15,6 +15,7 @@ import { SHORTTIME } from '../../utils/const';
 function Movies({
   onBookmark,
   onCheckBookmark,
+  setRequestSearchError,
   requestSearchError,
   searchMovie,
   movies,
@@ -39,6 +40,18 @@ function Movies({
   const listMovies = isShort
     ? movies.filter((item) => item.duration <= SHORTTIME)
     : movies;
+
+  React.useEffect(() => {
+    setRequestSearchError({
+      isRequestError: false,
+      messageRequestError: '',
+    });
+    listMovies.length === 0 &&
+      setRequestSearchError({
+        isRequestError: true,
+        messageRequestError: 'Ничего не найдено',
+      });
+  }, [isShort]);
 
   return (
     <>

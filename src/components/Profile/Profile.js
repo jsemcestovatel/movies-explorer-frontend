@@ -50,6 +50,11 @@ function Profile({
     setMesageRequestError(requestEditProfileError.messageRequestError);
   }, [requestEditProfileError]);
 
+  React.useEffect(() => {
+    setIsRequestError(false);
+    setMesageRequestError('');
+  }, []);
+
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />

@@ -12,6 +12,7 @@ import { SHORTTIME } from '../../utils/const';
 function SavedMovies({
   requestSearchError,
   searchMovie,
+  setRequestSearchError,
   removeSavedMovies,
   movies,
   isLoggedIn,
@@ -25,6 +26,18 @@ function SavedMovies({
   const listMovies = isShort
     ? movies.filter((item) => item.duration <= SHORTTIME)
     : movies;
+
+  React.useEffect(() => {
+    setRequestSearchError({
+      isRequestError: false,
+      messageRequestError: '',
+    });
+    listMovies.length === 0 &&
+      setRequestSearchError({
+        isRequestError: true,
+        messageRequestError: 'Ничего не найдено',
+      });
+  }, [isShort]);
 
   return (
     <>

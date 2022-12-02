@@ -3,7 +3,6 @@ import { BASEURL } from './const.js';
 class MainApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
   }
 
   // проверка ответа
@@ -12,6 +11,14 @@ class MainApi {
       return Promise.reject(await res.json());
     }
     return res.json();
+  }
+
+  setToken(token) {
+    this._headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
   }
 
   editProfileApi(data) {
@@ -62,16 +69,9 @@ class MainApi {
   }
 }
 
-const token = localStorage.getItem('jwt');
-
 const API_CONFIG = {
   baseUrl: BASEURL,
   credentials: 'include',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
-  },
 };
 
 // Инстанс класса MainApi

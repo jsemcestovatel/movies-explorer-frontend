@@ -89,6 +89,7 @@ function App() {
 
   // Проверка актуальности токена
   function handleTokenCheck() {
+    // console.log('check');
     const token = localStorage.getItem('jwt');
     if (token) {
       auth
@@ -97,15 +98,17 @@ function App() {
           if (res) {
             setIsLoggedIn(true);
             setCurrentUser({ name: res.name, email: res.email });
+            mainApi.setToken(token);
             history.push(location.pathname);
           }
         })
         .catch((err) => {
-          setIsLoggedIn(false);
           console.log(`Возникла ошибка. ${err}`);
-          history.push('/');
+          handleSignOut();
         });
+        return;
     }
+    handleSignOut();
   }
 
   // Регистрация
@@ -174,6 +177,7 @@ function App() {
   React.useEffect(() => {
     if (isLoggedIn) {
       localStorage.setItem('shortMovie', false);
+      localStorage.setItem('searchText', '');
       getAllMovies();
       getSavedMovies();
     }
@@ -184,6 +188,7 @@ function App() {
       isRequestError: false,
       messageRequestError: '',
     });
+    location.pathname === '/saved-movies' && setFilteredSavedMovies(savedMovies);
   },[location]);
 
   function getAllMovies() {
@@ -191,8 +196,8 @@ function App() {
       .getAllMovies()
       .then((data) => {
         localStorage.setItem('allMovies', JSON.stringify(data));
-        setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
-        // setIsLoading(false);
+        setAllMovies(data);
+        // setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
       })
       .catch((err) => {
         console.log(err);
@@ -277,11 +282,26 @@ function App() {
 
     setIsLoading(true);
     setRequestSearchError({ isRequestError: false, messageRequestError: '' });
-    setFilteredMovies([]);
+    // setFilteredMovies([]);
 
     const filter = movies.filter((i) =>
       i.nameRU.toLowerCase().includes(searchText.toLowerCase()),
     );
+
+    if (savedMoviesPage) {
+      setRequestSearchError({
+        isRequestError: false,
+        messageRequestError: '',
+      });
+      if (!searchText) {
+        setRequestSearchError({
+          isRequestError: true,
+          messageRequestError: 'Нужно ввести ключевое слово',
+        });
+        // return;
+      }
+      setFilteredSavedMovies(filter);
+    }
 
     if (allMoviesPage) {
       if (!searchText) {
@@ -297,13 +317,6 @@ function App() {
         messageRequestError: '',
       });
       setFilteredMovies(filter);
-    }
-    if (savedMoviesPage) {
-      setRequestSearchError({
-        isRequestError: false,
-        messageRequestError: '',
-      });
-      setFilteredSavedMovies(filter);
     }
 
     if (filter.length === 0) {
@@ -336,17 +349,8 @@ function App() {
             searchMovie={searchMovie}
             onBookmark={handleBookmark}
             onCheckBookmark={onCheckBookmark}
+            setRequestSearchError={setRequestSearchError}
             requestSearchError={requestSearchError}
-          ></ProtectedRoute>
-
-          <ProtectedRoute
-            component={Profile}
-            exact
-            path='/profile'
-            isLoggedIn={isLoggedIn}
-            onSignOut={handleSignOut}
-            onUpdateProfile={handleUpdateProfile}
-            requestEditProfileError={requestEditProfileError}
           ></ProtectedRoute>
 
           <ProtectedRoute
@@ -358,7 +362,18 @@ function App() {
             movies={filteredSavedMovies}
             searchMovie={searchMovie}
             removeSavedMovies={removeSavedMovies}
+            setRequestSearchError={setRequestSearchError}
             requestSearchError={requestSearchError}
+          ></ProtectedRoute>
+
+          <ProtectedRoute
+            component={Profile}
+            exact
+            path='/profile'
+            isLoggedIn={isLoggedIn}
+            onSignOut={handleSignOut}
+            onUpdateProfile={handleUpdateProfile}
+            requestEditProfileError={requestEditProfileError}
           ></ProtectedRoute>
 
           <Route path='/signup'>

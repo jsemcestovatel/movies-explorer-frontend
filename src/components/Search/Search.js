@@ -8,18 +8,17 @@ import './Search.css';
 
 function Search({ searchMovie, onIsShort, isShort }) {
   const location = useLocation();
-  const [searchText, setSearchText] = React.useState(
-    localStorage.getItem('searchText') || '',
-  );
+  const [searchText, setSearchText] = React.useState('');
 
-  const allMoviesPage = location.pathname === '/movies';
+  React.useEffect(() => {
+    setSearchText('');
+    location.pathname === '/movies' && setSearchText(localStorage.getItem('searchText'));
+  }, [location]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     searchMovie(searchText);
-    if (allMoviesPage) {
-      localStorage.setItem('searchText', evt.target.search.value);
-    }
+    location.pathname === '/movies' && localStorage.setItem('searchText', evt.target.search.value);
   }
 
   function handleChange(evt) {
@@ -31,7 +30,7 @@ function Search({ searchMovie, onIsShort, isShort }) {
       <SearchForm
         onSubmit={handleSubmit}
         onChange={handleChange}
-        value={searchText}
+        value={searchText == null ? '' : searchText}
       />
       <SearchFilter onIsShort={onIsShort} isShort={isShort} />
       <div className='decoration'> </div>

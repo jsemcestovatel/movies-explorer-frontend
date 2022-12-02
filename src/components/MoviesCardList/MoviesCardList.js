@@ -50,12 +50,11 @@ function MoviesCardList({
       setMoviesOnView(moviesOnView + params.INCREASEONSMALLSCREEN);
     }
   }
-  const count = savedMoviesPage ? movies.length : moviesOnView;
 
   return (
     <section className='movies'>
       <ul className='movies__elements'>
-        {movies.slice(0, count).map((item) => (
+        {movies.slice(0, savedMoviesPage ? movies.length : moviesOnView).map((item) => (
           <MoviesCard
             key={item.id || item.movieId}
             card={item}

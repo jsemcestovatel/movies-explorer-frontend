@@ -12,7 +12,7 @@ function Search({ searchMovie, onIsShort, isShort }) {
 
   React.useEffect(() => {
     setSearchText('');
-    location.pathname === '/movies' && setSearchText(localStorage.getItem('searchText'));
+    location.pathname === '/movies' && localStorage.getItem('searchText') && setSearchText(localStorage.getItem('searchText'));
   }, [location]);
 
   function handleSubmit(evt) {

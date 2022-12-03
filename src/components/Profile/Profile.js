@@ -12,38 +12,49 @@ function Profile({
   requestEditProfileError,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation('');
 
   const [isInputDisabled, setIsInputDisabled] = React.useState(true);
+  const [isSubmitDisabled, setIsSubmitDisabled] = React.useState(true);
+
   const [isEdit, setIsEdit] = React.useState(false);
-  // const [resetError, setResetError] = React.useState();
 
   const [isRequestError, setIsRequestError] = React.useState(false);
   const [messageRequestError, setMesageRequestError] = React.useState('');
 
-  const isSubmitDisabled =
-    isValid &&
-    (values.name !== currentUser.name || values.email !== currentUser.email);
-
   function handleEditProfile() {
+    resetForm(currentUser, {}, false);
     setIsRequestError(false);
     setMesageRequestError('');
-    setIsInputDisabled(!isInputDisabled);
+    setIsInputDisabled(false);
     setIsEdit(!isEdit);
   }
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
+    // очищаю ошибку и блокирую поля ввода
+    setIsRequestError(false);
+    setMesageRequestError('');
+    setIsInputDisabled(true);
+    setIsSubmitDisabled(true);
     // Передаём значения управляемых компонентов во внешний обработчик
     const newValues = {
       name: values.name === undefined ? currentUser.name : values.name,
       email: values.email === undefined ? currentUser.email : values.email,
     };
     onUpdateProfile(newValues);
-    setIsInputDisabled(!isInputDisabled);
     setIsEdit(!isEdit);
+    resetForm(newValues, {}, false);
   }
+
+  React.useEffect(() => {
+    setIsSubmitDisabled(
+      isValid &&
+        (values.name !== currentUser.name ||
+          values.email !== currentUser.email),
+    );
+  }, [values.name, values.email, isValid, currentUser.name, currentUser.email]);
 
   React.useEffect(() => {
     setIsRequestError(requestEditProfileError.isRequestError);
@@ -96,6 +107,8 @@ function Profile({
                 type='email'
                 id='email'
                 name='email'
+                pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+                title='Это неполный адрес email'
                 required
                 onChange={handleChange}
                 value={values.email || currentUser.email}
@@ -129,7 +142,10 @@ function Profile({
             </span>
             {isEdit ? (
               <button
-                className='profile__button profile__button_submit button link'
+                className={
+                  'profile__button profile__button_submit button ' +
+                  (!isSubmitDisabled ? '' : 'link')
+                }
                 type='submit'
                 onClick={handleSubmit}
                 disabled={!isSubmitDisabled}

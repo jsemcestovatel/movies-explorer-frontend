@@ -106,7 +106,7 @@ function App() {
           console.log(`Возникла ошибка. ${err}`);
           handleSignOut();
         });
-        return;
+      return;
     }
     handleSignOut();
   }
@@ -131,10 +131,7 @@ function App() {
 
   // Выйти из аккаунта
   function handleSignOut() {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('allMovies');
-    localStorage.removeItem('shortMovie');
-    localStorage.removeItem('searchText');
+    localStorage.clear();
     setIsLoggedIn(false);
     setAllMovies([]);
     setSavedMovies([]);
@@ -175,38 +172,65 @@ function App() {
 
   // Блок фильмы
   React.useEffect(() => {
-    if (isLoggedIn) {
-      localStorage.setItem('shortMovie', false);
-      localStorage.setItem('searchText', '');
-      getAllMovies();
-      getSavedMovies();
-    }
-  }, [isLoggedIn]);
-  
-  React.useEffect(()=> {
     setRequestSearchError({
       isRequestError: false,
       messageRequestError: '',
-    });
-    location.pathname === '/saved-movies' && setFilteredSavedMovies(savedMovies);
-  },[location]);
+    });  
+    if (isLoggedIn) {
+      // localStorage.setItem('shortMovie', false);
+      // localStorage.setItem('searchText', '');
+      getAllMovies();
+      getSavedMovies();
+      if (localStorage.getItem('searchMovies')) {
+        setFilteredMovies(JSON.parse(localStorage.getItem('searchMovies')));
+        if (JSON.parse(localStorage.getItem('searchMovies')).length === 0) {
+          setRequestSearchError({
+            isRequestError: true,
+            messageRequestError: 'Ничего не найдено',
+          });
+        }
+        setIsLoading(false);
+      }
+    }
+  }, [isLoggedIn]);
+
+  React.useEffect(() => {
+    if (location.pathname === '/movies') {
+      if (!localStorage.getItem('searchMovies')) {
+        setRequestSearchError({
+          isRequestError: false,
+          messageRequestError: '',
+        });
+      }
+    }
+    if (location.pathname === '/saved-movies') {
+      setRequestSearchError({
+        isRequestError: false,
+        messageRequestError: '',
+      });  
+      setFilteredSavedMovies(savedMovies);
+    }
+  }, [location]);
 
   function getAllMovies() {
-    moviesApi
-      .getAllMovies()
-      .then((data) => {
-        localStorage.setItem('allMovies', JSON.stringify(data));
-        setAllMovies(data);
-        // setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
-      })
-      .catch((err) => {
-        console.log(err);
-        setRequestSearchError({
-          isRequestError: true,
-          messageRequestError:
-            'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+    if (localStorage.getItem('allMovies')) {
+      setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
+    } else {
+      moviesApi
+        .getAllMovies()
+        .then((data) => {
+          localStorage.setItem('allMovies', JSON.stringify(data));
+          setAllMovies(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          setRequestSearchError({
+            isRequestError: true,
+            messageRequestError:
+              'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+          });
         });
-      });
+    }
   }
 
   function getSavedMovies() {
@@ -275,9 +299,9 @@ function App() {
   }
   // Поиск в Фильмы
   function searchMovie(searchText) {
+    // getAllMovies();
     const allMoviesPage = location.pathname === '/movies';
     const savedMoviesPage = location.pathname === '/saved-movies';
-
     const movies = allMoviesPage ? allMovies : savedMovies;
 
     setIsLoading(true);
@@ -309,6 +333,8 @@ function App() {
           isRequestError: true,
           messageRequestError: 'Нужно ввести ключевое слово',
         });
+        localStorage.removeItem('searchMovies');
+        setFilteredMovies([]);
         setIsLoading(false);
         return;
       }
@@ -317,6 +343,7 @@ function App() {
         messageRequestError: '',
       });
       setFilteredMovies(filter);
+      localStorage.setItem('searchMovies', JSON.stringify(filter));
     }
 
     if (filter.length === 0) {
@@ -326,6 +353,7 @@ function App() {
       });
       setIsLoading(false);
     }
+
     setIsLoading(false);
   }
 

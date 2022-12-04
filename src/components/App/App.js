@@ -104,11 +104,14 @@ function App() {
         })
         .catch((err) => {
           console.log(`Возникла ошибка. ${err}`);
-          handleSignOut();
+          console.log(err);
+          if (err.statusCode === 401) {
+            handleSignOut();
+          }
         });
-      return;
+      // return;
     }
-    handleSignOut();
+    // handleSignOut();
   }
 
   // Регистрация

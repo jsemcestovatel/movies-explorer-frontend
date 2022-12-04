@@ -27,13 +27,31 @@
   color: var(--color-ground);
 }
 
+.search__input_active {
+  color: var(--color-red);
+}
+
+.search__input_error {
+  display: none;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--color-red);
+  padding-top: 5px;
+}
+
+.search__error_active {
+  display: flex;
+}
+
 .search__button {
   background-image: url(../../images/Find.svg);
   background-repeat: no-repeat;
   box-sizing: border-box;
   width: 34px;
   height: 34px;
-  padding-right: 65px;
+  margin-left: 15px;
+  padding-right: 50px;
   border-right-color: var(--color-darkgrey);
   border-right-style: solid;
   border-right-width: 1px;
@@ -51,7 +69,7 @@
 
 @media screen and (max-width: 620px) {
   .search__form {
-    border-radius: 9px;      
+    border-radius: 9px;
   }
 
   .search__input {

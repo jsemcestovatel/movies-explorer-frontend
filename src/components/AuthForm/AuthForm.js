@@ -6,14 +6,17 @@ import './AuthForm.css';
 function AuthForm({
   onChange,
   onSubmit,
+  isSubmitDisabled,
   formName,
   value,
+  error,
   buttonText,
   text,
   link,
   linkText,
+  requestError,
 }) {
-  const [isError, setIsError] = React.useState(false);
+  const { isRequestError, messageRequestError } = requestError;
 
   return (
     <main className='auth'>
@@ -23,8 +26,9 @@ function AuthForm({
             <div className='auth__item'>
               <span className='auth__caption'>Имя</span>
               <input
+                autoFocus
                 className={`${
-                  isError ? 'auth__input auth__input_active' : 'auth__input'
+                  error.name ? 'auth__input auth__input_active' : 'auth__input'
                 }`}
                 type='text'
                 id='name'
@@ -37,10 +41,12 @@ function AuthForm({
               />
               <span
                 className={`${
-                  isError ? 'auth_error auth_error_active' : 'auth_error'
+                  error.name
+                    ? 'auth__error_active auth__input_error'
+                    : 'auth__input_error'
                 }`}
               >
-                Что-то пошло не так...
+                {error.name}
               </span>
             </div>
           )}
@@ -49,21 +55,25 @@ function AuthForm({
             <span className='auth__caption'>E-mail</span>
             <input
               className={`${
-                isError ? 'auth__input auth__input_active' : 'auth__input'
+                error.email ? 'auth__input auth__input_active' : 'auth__input'
               }`}
               type='email'
               id='email'
               name='email'
+              pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+              title='Это неполный адрес email'
               required
               onChange={onChange}
               value={value.email || ''}
             />
             <span
               className={`${
-                isError ? 'auth_error auth_error_active' : 'auth_error'
+                error.email
+                  ? 'auth__error_active auth__input_error'
+                  : 'auth__input_error'
               }`}
             >
-              Что-то пошло не так...
+              {error.email}
             </span>
           </div>
 
@@ -71,7 +81,9 @@ function AuthForm({
             <span className='auth__caption'>Пароль</span>
             <input
               className={`${
-                isError ? 'auth__input auth__input_active' : 'auth__input'
+                error.password
+                  ? 'auth__input auth__input_active'
+                  : 'auth__input'
               }`}
               type='password'
               id='password'
@@ -82,16 +94,30 @@ function AuthForm({
             />
             <span
               className={`${
-                isError ? 'auth_error auth_error_active' : 'auth_error'
+                error.password
+                  ? 'auth__error_active auth__input_error'
+                  : 'auth__input_error'
               }`}
             >
-              Что-то пошло не так...
+              {error.password}
             </span>
           </div>
         </div>
 
         <div className='auth__submit'>
-          <button className='auth__button link' type='submit'>
+          <span
+            className={`${
+              isRequestError ? 'auth__error auth__error_active' : 'auth__error'
+            }`}
+          >
+            {messageRequestError}
+          </span>
+          <button
+            className='auth__button link'
+            type='submit'
+            aria-label={`Кнопка ${buttonText}`}
+            disabled={isSubmitDisabled}
+          >
             {buttonText}
           </button>
           <p className='auth__text'>

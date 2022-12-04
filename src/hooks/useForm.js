@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
 
+//хук управления формой
 function useForm(inputValues) {
   const [values, setValues] = React.useState(inputValues);
 

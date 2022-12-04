@@ -2,17 +2,23 @@ import React from 'react';
 import './Login.css';
 import AuthForm from '../AuthForm/AuthForm';
 import AuthHeader from '../AuthHeader/AuthHeader';
-import useForm from '../../hooks/useForm';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function Login({ onSignIn }) {
-  const { values, handleChange, setValues } = useForm({});
+function Login({ onSignIn, requestSignInError }) {
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
+  const isDisabled = !isValid;
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
-    onSignIn();
+    onSignIn(values);
   }
+
+  React.useEffect(() => {
+    resetForm({}, {}, false);
+  }, [resetForm]);
 
   return (
     <>
@@ -24,8 +30,11 @@ function Login({ onSignIn }) {
         linkText='Регистрация'
         link='/signup'
         onSubmit={handleSubmit}
+        isSubmitDisabled={isDisabled}
         onChange={handleChange}
         value={values}
+        error={errors}
+        requestError={requestSignInError}
       />
     </>
   );

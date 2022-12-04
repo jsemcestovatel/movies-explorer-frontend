@@ -2,29 +2,26 @@ import React from 'react';
 import './Register.css';
 import AuthForm from '../AuthForm/AuthForm';
 import AuthHeader from '../AuthHeader/AuthHeader';
-import useForm from '../../hooks/useForm';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-function Register({onSignUp}) {
-  const { values, handleChange, setValues } = useForm({});
-
-  // React.useEffect(() => {
-  //   setValues({
-  //     name: values.name,
-  //     email: values.email,
-  //     password: values.password,
-  //   });
-  // }, [values]);
+function Register({ onSignUp, requestSignUpError }) {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
+  const isDisabled = !isValid;
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     // Передаём значения управляемых компонентов во внешний обработчик
-    onSignUp();
+    onSignUp(values);
   }
+
+  React.useEffect(() => {
+    resetForm({}, {}, false);
+  }, [resetForm]);
 
   return (
     <>
-      <AuthHeader title='Добро пожаловать!'/>
+      <AuthHeader title='Добро пожаловать!' />
       <AuthForm
         formName='form-signup'
         buttonText='Зарегистрироваться'
@@ -32,8 +29,11 @@ function Register({onSignUp}) {
         linkText='Войти'
         link='/signin'
         onSubmit={handleSubmit}
+        isSubmitDisabled={isDisabled}
         onChange={handleChange}
         value={values}
+        error={errors}
+        requestError={requestSignUpError}
       />
     </>
   );

@@ -1,19 +1,22 @@
 import './SearchForm.css';
 
-function SearchForm() {
+function SearchForm({ value, onSubmit, onChange }) {
   return (
-      <form className='search__form'>
-        <input
-          type='text'
-          id='search-form'
-          name='search-form'
-          encType='text/plain'
-          placeholder='Фильм'
-          className='search__input'
-          required
-        />
-        <button type='submit' className='button search__button link'></button>
-      </form>
+    <form className='search__form' name='search' onSubmit={onSubmit}>
+      <input
+        className='search__input'
+        type='text'
+        id='search'
+        name='search'
+        // minLength='2'
+        // required
+        encType='text/plain'
+        placeholder='Фильм'
+        onChange={onChange}
+        value={value}
+      />
+      <button type='submit' className='button search__button link'></button>
+    </form>
   );
 }
 

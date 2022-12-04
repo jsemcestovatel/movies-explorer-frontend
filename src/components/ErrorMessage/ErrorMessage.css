@@ -1,0 +1,20 @@
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error__message {
+  display: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: var(--color-red);
+  padding: 70px;
+  margin: 0;
+  text-align: center;
+}
+
+.error__message_active {
+  display: flex;
+}
